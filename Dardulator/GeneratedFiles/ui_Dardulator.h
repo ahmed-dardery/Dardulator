@@ -37,7 +37,7 @@ public:
     QGridLayout *gridLayout_2;
     QPushButton *btnDivide;
     QPushButton *btnMultiply;
-    QLabel *lblOverflow;
+    QLabel *lblOperator;
     QLabel *lblMemory;
     QPushButton *btn1;
     QPushButton *btnPi;
@@ -77,7 +77,7 @@ public:
     {
         if (DardulatorClass->objectName().isEmpty())
             DardulatorClass->setObjectName(QStringLiteral("DardulatorClass"));
-        DardulatorClass->resize(560, 399);
+        DardulatorClass->resize(422, 386);
         actionCopy = new QAction(DardulatorClass);
         actionCopy->setObjectName(QStringLiteral("actionCopy"));
         actionPaste = new QAction(DardulatorClass);
@@ -110,19 +110,27 @@ public:
 
         gridLayout_2->addWidget(btnMultiply, 5, 3, 1, 1);
 
-        lblOverflow = new QLabel(gridLayoutWidget);
-        lblOverflow->setObjectName(QStringLiteral("lblOverflow"));
+        lblOperator = new QLabel(gridLayoutWidget);
+        lblOperator->setObjectName(QStringLiteral("lblOperator"));
         QFont font;
-        font.setPointSize(10);
-        lblOverflow->setFont(font);
-        lblOverflow->setFrameShape(QFrame::Box);
-        lblOverflow->setAlignment(Qt::AlignCenter);
+        font.setFamily(QStringLiteral("MS Shell Dlg 2"));
+        font.setPointSize(12);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setWeight(9);
+        lblOperator->setFont(font);
+        lblOperator->setStyleSheet(QLatin1String("color: gray;\n"
+"font: 75 12pt \"MS Shell Dlg 2\";"));
+        lblOperator->setFrameShape(QFrame::Box);
+        lblOperator->setAlignment(Qt::AlignCenter);
 
-        gridLayout_2->addWidget(lblOverflow, 1, 3, 1, 1);
+        gridLayout_2->addWidget(lblOperator, 1, 3, 1, 1);
 
         lblMemory = new QLabel(gridLayoutWidget);
         lblMemory->setObjectName(QStringLiteral("lblMemory"));
         lblMemory->setFont(font);
+        lblMemory->setStyleSheet(QLatin1String("color: gray;\n"
+"font: 75 12pt \"MS Shell Dlg 2\";"));
         lblMemory->setFrameShape(QFrame::Box);
         lblMemory->setAlignment(Qt::AlignCenter);
 
@@ -281,6 +289,8 @@ public:
         lblError = new QLabel(gridLayoutWidget);
         lblError->setObjectName(QStringLiteral("lblError"));
         lblError->setFont(font);
+        lblError->setStyleSheet(QLatin1String("color: gray;\n"
+"font: 75 12pt \"MS Shell Dlg 2\";"));
         lblError->setFrameShape(QFrame::Box);
         lblError->setAlignment(Qt::AlignCenter);
 
@@ -311,6 +321,7 @@ public:
         btnEqual->setObjectName(QStringLiteral("btnEqual"));
         sizePolicy.setHeightForWidth(btnEqual->sizePolicy().hasHeightForWidth());
         btnEqual->setSizePolicy(sizePolicy);
+        btnEqual->setAutoDefault(true);
 
         gridLayout_2->addWidget(btnEqual, 6, 4, 2, 1);
 
@@ -338,6 +349,7 @@ public:
         QFont font1;
         font1.setPointSize(12);
         txtDisplay->setFont(font1);
+        txtDisplay->setMaxLength(-1);
         txtDisplay->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         txtDisplay->setReadOnly(true);
 
@@ -372,7 +384,7 @@ public:
         DardulatorClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(DardulatorClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 560, 21));
+        menuBar->setGeometry(QRect(0, 0, 422, 21));
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
         DardulatorClass->setMenuBar(menuBar);
@@ -389,6 +401,9 @@ public:
 
         retranslateUi(DardulatorClass);
 
+        btnEqual->setDefault(true);
+
+
         QMetaObject::connectSlotsByName(DardulatorClass);
     } // setupUi
 
@@ -401,8 +416,14 @@ public:
 #endif // QT_NO_SHORTCUT
         actionPaste->setText(QApplication::translate("DardulatorClass", "Paste", nullptr));
         btnDivide->setText(QApplication::translate("DardulatorClass", "/", nullptr));
+#ifndef QT_NO_SHORTCUT
+        btnDivide->setShortcut(QApplication::translate("DardulatorClass", "/", nullptr));
+#endif // QT_NO_SHORTCUT
         btnMultiply->setText(QApplication::translate("DardulatorClass", "x", nullptr));
-        lblOverflow->setText(QApplication::translate("DardulatorClass", "O", nullptr));
+#ifndef QT_NO_SHORTCUT
+        btnMultiply->setShortcut(QApplication::translate("DardulatorClass", "*", nullptr));
+#endif // QT_NO_SHORTCUT
+        lblOperator->setText(QApplication::translate("DardulatorClass", "O", nullptr));
         lblMemory->setText(QApplication::translate("DardulatorClass", "M", nullptr));
         btn1->setText(QApplication::translate("DardulatorClass", "1", nullptr));
 #ifndef QT_NO_SHORTCUT
@@ -444,12 +465,18 @@ public:
         btn8->setShortcut(QApplication::translate("DardulatorClass", "8", nullptr));
 #endif // QT_NO_SHORTCUT
         btnMinus->setText(QApplication::translate("DardulatorClass", "-", nullptr));
+#ifndef QT_NO_SHORTCUT
+        btnMinus->setShortcut(QApplication::translate("DardulatorClass", "-", nullptr));
+#endif // QT_NO_SHORTCUT
         btn2->setText(QApplication::translate("DardulatorClass", "2", nullptr));
 #ifndef QT_NO_SHORTCUT
         btn2->setShortcut(QApplication::translate("DardulatorClass", "2", nullptr));
 #endif // QT_NO_SHORTCUT
         btnSign->setText(QApplication::translate("DardulatorClass", "\302\261", nullptr));
         btnPlus->setText(QApplication::translate("DardulatorClass", "+", nullptr));
+#ifndef QT_NO_SHORTCUT
+        btnPlus->setShortcut(QApplication::translate("DardulatorClass", "+", nullptr));
+#endif // QT_NO_SHORTCUT
         btn0->setText(QApplication::translate("DardulatorClass", "0", nullptr));
 #ifndef QT_NO_SHORTCUT
         btn0->setShortcut(QApplication::translate("DardulatorClass", "0", nullptr));
@@ -459,6 +486,9 @@ public:
         btnDot->setShortcut(QApplication::translate("DardulatorClass", ".", nullptr));
 #endif // QT_NO_SHORTCUT
         btnPower->setText(QApplication::translate("DardulatorClass", "^", nullptr));
+#ifndef QT_NO_SHORTCUT
+        btnPower->setShortcut(QApplication::translate("DardulatorClass", "^", nullptr));
+#endif // QT_NO_SHORTCUT
         btnC->setText(QApplication::translate("DardulatorClass", "C", nullptr));
         btn7->setText(QApplication::translate("DardulatorClass", "7", nullptr));
 #ifndef QT_NO_SHORTCUT
@@ -478,11 +508,15 @@ public:
         btnMClear->setShortcut(QApplication::translate("DardulatorClass", "Backspace", nullptr));
 #endif // QT_NO_SHORTCUT
         btnEqual->setText(QApplication::translate("DardulatorClass", "=", nullptr));
+#ifndef QT_NO_SHORTCUT
+        btnEqual->setShortcut(QApplication::translate("DardulatorClass", "Return, Enter", nullptr));
+#endif // QT_NO_SHORTCUT
         pushButton->setText(QApplication::translate("DardulatorClass", "1/x", nullptr));
         btn5->setText(QApplication::translate("DardulatorClass", "5", nullptr));
 #ifndef QT_NO_SHORTCUT
         btn5->setShortcut(QApplication::translate("DardulatorClass", "5", nullptr));
 #endif // QT_NO_SHORTCUT
+        txtDisplay->setText(QApplication::translate("DardulatorClass", "0", nullptr));
         menuEdit->setTitle(QApplication::translate("DardulatorClass", "Edit", nullptr));
     } // retranslateUi
 

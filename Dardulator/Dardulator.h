@@ -12,11 +12,24 @@ public:
 
 private slots:
 	void on_btn0_clicked();
-	void on_numbers_clicked();
+	void on_numbers_clicked(QString);
+	void on_operator_clicked(QString);
+
+	void on_btnEqual_clicked();
+
+	void calculateTotal(bool x);
+	
+	void performError(QString msg);
+
 	void on_btnDot_clicked();
+	
+	void on_btnC_clicked();
+	void on_btnCE_clicked();
 
-
-private:
-	Ui::DardulatorClass ui;
 	void appendText(QString text);
+	
+private:
+	bool clearOnInput();
+	void setClearOnInput(bool);
+	Ui::DardulatorClass ui;
 };
